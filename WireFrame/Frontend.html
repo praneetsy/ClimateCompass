@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('https://as2.ftcdn.net/v2/jpg/04/61/23/23/1000_F_461232389_XCYvca9n9P437nm3FrCsEIapG4SrhufP.jpg') center/cover no-repeat; /* Replace with your weather background image URL */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #weatherContainer {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            width: 400px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        h1 {
+            color: #1877f2;
+            margin-top: 0;
+        }
+
+        #locationInput {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #dddfe2;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #temperatureDisplay {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .monthTemperature {
+            flex: 1 0 calc(25% - 10px); /* 100% / 4 - margin */
+            margin: 0 5px;
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: #e4e6eb;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #dateInput {
+            width: 60%;
+            padding: 10px;
+            border: 1px solid #dddfe2;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #cityDropdown {
+            width: 80%;
+            padding: 10px;
+            border: 1px solid #dddfe2;
+            border-radius: 5px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="weatherContainer">
+        <h1>Climate Compass</h1>
+
+        <input type="text" id="locationInput" placeholder="Search Location">
+
+        <div id="temperatureDisplay"></div>
+
+        <div id="dateInput">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date">
+        </div>
+
+        <div id="cityDropdown">
+            <label for="cityDropdown">Select City:</label>
+            <select id="cityDropdown">
+                <option value="New York">New York</option>
+        <option value="Los Angeles">Los Angeles</option>
+        <option value="Chicago">Chicago</option>
+        <option value="Houston">Houston</option>
+        <option value="Phoenix">Phoenix</option>
+        <option value="Philadelphia">Philadelphia</option>
+        <option value="San Antonio">San Antonio</option>
+        <option value="San Diego">San Diego</option>
+        <option value="Dallas">Dallas</option>
+        <option value="San Jose">San Jose</option>
+        <option value="Austin">Austin</option>
+        <option value="Indianapolis">Indianapolis</option>
+        <option value="Jacksonville">Jacksonville</option>
+        <option value="San Francisco">San Francisco</option>
+        <option value="Columbus">Columbus</option>
+        <option value="Fort Worth">Fort Worth</option>
+        <option value="Charlotte">Charlotte</option>
+        <option value="Detroit">Detroit</option>
+        <option value="El Paso">El Paso</option>
+        <option value="Memphis">Memphis</option>
+        <option value="Boston">Boston</option>
+        <option value="Seattle">Seattle</option>
+        <option value="Denver">Denver</option>
+        <option value="Washington">Washington</option>
+        <option value="Nashville">Nashville</option>
+        <option value="Baltimore">Baltimore</option>
+        <option value="Oklahoma City">Oklahoma City</option>
+        <option value="Louisville">Louisville</option>
+        <option value="Portland">Portland</option>
+        <option value="Las Vegas">Las Vegas</option>
+        <option value="Milwaukee">Milwaukee</option>
+        <option value="Albuquerque">Albuquerque</option>
+        <option value="Tucson">Tucson</option>
+        <option value="Fresno">Fresno</option>
+        <option value="Sacramento">Sacramento</option>
+        <option value="Long Beach">Long Beach</option>
+        <option value="Kansas City">Kansas City</option>
+        <option value="Mesa">Mesa</option>
+        <option value="Atlanta">Atlanta</option>
+        <option value="Colorado Springs">Colorado Springs</option>
+        <option value="Raleigh">Raleigh</option>
+        <option value="Miami">Miami</option>
+        <option value="Oakland">Oakland</option>
+        <option value="Minneapolis">Minneapolis</option>
+        <option value="Tulsa">Tulsa</option>
+        <option value="Cleveland">Cleveland</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for display purposes
+        const mockData = {
+            location: 'New York',
+            temperatures: [-2, -4, 3, 9, 14, 21, 24, 25, 18, 10, 5, 2], // Temperatures for the next 12 months
+        };
+
+        // Display mock data
+        displayWeather(mockData);
+
+        function displayWeather(data) {
+            const locationInput = document.getElementById('locationInput');
+            const temperatureDisplay = document.getElementById('temperatureDisplay');
+
+            locationInput.value = data.location;
+
+            // Clear previous temperature display
+            temperatureDisplay.innerHTML = '';
+
+            // Display temperatures for the next 12 months with first 3 letters of month names
+            data.temperatures.forEach((temperature, index) => {
+                const monthTemperature = document.createElement('div');
+                monthTemperature.classList.add('monthTemperature');
+                const monthName = new Intl.DateTimeFormat('en-US', { month: 'short' }).format(new Date(2023, index));
+                monthTemperature.textContent = `${monthName}: ${temperature}°C`;
+                temperatureDisplay.appendChild(monthTemperature);
+            });
+        }
+    </script>
+</body>
+</html>
